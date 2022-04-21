@@ -19,12 +19,30 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xz&e70u+&&@pb$ol@pf_q4yf0*n#b9%o$jo+6j9p77nct6(h*m'
+import json
+import os
+from pathlib import Path
+from django.core.exceptions import ImproperlyConfigured
+
+secret_file = os.path.join(BASE_DIR, 'secrets.json')
+
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+SECRET_KEY = get_secret('django-insecure-xz&e70u+&&@pb$ol@pf_q4yf0*n#b9%o$jo+6j9p77nct6(h*m')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG', 'True') != 'False')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -46,6 +64,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -161,3 +180,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '246855461881-gc3adj66g1m57rtl2spdgf5di0nsvaon.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
