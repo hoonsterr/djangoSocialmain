@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>캘리 :: 인공지능 폰트제작 서비스</title>
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}?after" />
+		<link rel="stylesheet" href="{% static 'assets/css/webfonts.css' %}?after" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+	</head>
+	<body class="is-preload">
+		 <div class="container" id="blur">
+
+		<!-- Header -->
+			<div id="header">
+				<a class="logo kr" href="{% url 'homepage' %}"><strong>인공지능</strong> 폰트제작소</a>
+				<nav id="nav">
+					<ul>
+						<li><a href="{% url 'homepage' %}">Home</a></li>
+						<li><a href="{% url 'about' %}">About</a></li>
+						<li><a href="{% url 'trial' %}">Trial</a></li>
+						<li class="active"><a href="{% url 'create' %}">Create</a></li>
+                        <!-- 아래에 주석 처리된 메뉴는 로그인 후에 나타날 메뉴 -->
+						<!-- <li><a href="mypage.html">My Page</a></li> -->
+						<!-- 아래의 Login은 로그인 후에는 Logout으로 바뀌어야 함 -->
+						{% if not request.session.user and not user.is_authenticated %}
+							<li><a href="{% url 'login' %}" method="POST">Login</a></li>
+							{% elif request.session.user %}
+							<li><a href="{% url 'mypage' %}">My Page</a></li>
+							<li><a href="{% url 'logout' %}" method="POST">LogOut</a></li>
+							{% elif user.is_authenticated %}
+							<li><a href="{% url 'mypage' %}">My Page</a></li>
+							<li><a href="{% url 'socialout' %}" method="POST">LogOut</a></li>
+							{% endif %}
+					</ul>
+				</nav>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Header -->
+					<header>
+						<h1>Create Cali</h1>
+					</header>
+
+				<!-- Banner -->
+                    <section class="created">
+
+                    </section>
+
+                <!-- Content -->
+                    <section id="five" class="wrapper">
+                        <h2 class="kr-bold">내 손글씨, 폰트 제작 의뢰하는 방법</h2>
+                        <p class="kr"><span class="image left"><img src="{% static 'images/handwriting1.jpg' %}" alt="" /></span>하단의 버튼을 클릭해서 서식을 다운로드하여 출력한 후 직접 손글씨를 씁니다. 아래 일반형 서식에 500 여자만 쓰시면 나머지 글자들은 그 글자 모양에 맞게 제작됩니다. 글씨를 쓰는 서식은 모두 4page입니다. 예시 글자가 있고 그 아래 빈칸에 본인 글씨를 쓰도록 되어있습니다. 한글 500 여자 + 영문, 기호 포함해서 모두 700 여자를 쓰시면 됩니다. (소요시간은 보통 30분 전후 소요됩니다.)<br>
+                        서식은 우편 또는 택배로 발송 가능합니다. (주소는 홈페이지 하단에 적혀 있습니다.)
+                        혹은 하단의 파일 업로드 버튼을 통해서 고화질로 스캔하신 파일을 올려주시면 캘리 팀에서 바로 확인이 가능합니다. 서식이 도착하면 고객님의 메일 주소로 확인 메일을 보내드리고 제작한 후 완성된 폰트를 My Page를 통해 전달해드립니다. (제작기간은 보통 10일 전후 소요됩니다.)
+                        </p>
+                        <p class="kr"><span class="image right"><img src="{% static 'images/handwriting2.jpg' %}" alt="" /></span>신청서엔 회원님 이름, 연락처와 함께 폰트의 이름을 정해서 적어주세요.<br>(폰트 이름은 원하시는 대로 정할 수 있습니다.)<br>
+                        신청서 하단의 '문장쓰기'에는 아무 문장이나 적으시면 됩니다.<br>
+                        한 명의 회원님이 복수의 폰트를 신청하는 것도 물론 가능합니다. 여러 가지 글씨체를 쓰는 것이 가능하신 분이나 본인의 자녀의 어렸을 때의 글씨체를 추억으로 남겨두고 싶으신 분, 부모님의 멋진 글씨체를 폰트로 만들어서 남겨두고 싶으신 분들도 신청해주세요.</p>
+                    </section>
+
+                <!-- Buttons -->
+					<section id="content" class="wrapper">
+						<ul class="actions fit">
+							<li><a href="{% static 'files/font.hwp' %}" class="button icon solid fa-download">신청서・서식 다운로드</a></li>
+                            <!-- 로그인을 하지 않은 상태에서 아래의 업로드 버튼을 클릭하면 로그인 화면으로 넘어가게 하기 -->
+							<li><a href="javascript:void(0);" name="uploadedFile" class="button primary icon solid fa-upload" onclick="toggle();">신청서・서식 업로드</a></li>
+						</ul>
+					</section>
+
+            </div>
+
+		<!-- Footer -->
+			<div id="footer">
+				<h2>Contact</h2>
+				<p class="kr contact">평일	am 10:00 ~ pm 5:00<br>
+					점심시간 pm 1:00 ~ pm 2:00<br>
+					토요일, 일요일/공휴일 휴무</p>
+				<ul class="major-icons">
+					<li>
+						<h3 class="icon solid fa-phone major"><span class="label">Phone</span></h3>
+						<p>+82 10-2576-2911</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-map major"><span class="label">Address</span></h3>
+						<p class="kr contact">광주 동구 예술길 31-15<br />광주 아트센터 4층 (61474)</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-envelope major"><span class="label">Email</span></h3>
+						<p>yoonopt@gmail.com</p>
+					</li>
+				</ul>
+				<p class="copyright">Copyright &copy; 2022. Cali. All rights reserved.</p>
+			</div>
+		</div>
+
+		<!-- Popup -->
+		<div id="popup">
+			<h2>File Upload</h2>
+
+			<form action="{% url 'result' %}" method="post" enctype="multipart/form-data">
+				<div class="row gtr-uniform">
+					<p class="kr">작성한 신청서와 서식 파일을 업로드해주세요.<br>
+                        파일 선택 시 Ctrl 키를 누르고 선택을 하시면 여러 개의 파일을 복수 선택하실 수 있습니다.</p>
+					<!-- Break -->
+					<div class="col-12">
+						<input multiple="multiple"  type="file" name="filename[]" class="upload-box">
+					</div>
+					<!-- Break -->
+					<div class="col-12">
+						<ul class="actions fit">
+							<form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+								{% csrf_token %}
+							<li><input type="submit" value="파일 전송" class="primary" /></li>
+								</form>
+							<!-- a태그의 href="#" 때문에 클릭을 하면 페이지의 상단으로 이동하는 현상이 있었음. 구글링 덕분에 해결. -->
+							<li><a href="javascript:void(0);" class="button icon solid fa-times" onclick="toggle()">닫기</a></li>
+						</ul>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+			<script type="text/javascript">
+				/* 팝업창 뜨게 하는 함수 */
+				function toggle(){
+					let blur = document.getElementById('blur');
+					blur.classList.toggle('active');
+					let popup = document.getElementById('popup');
+					popup.classList.toggle('active');
+				}
+
+			</script>
+	</body>
+</html>

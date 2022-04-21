@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>캘리 :: 인공지능 폰트제작 서비스</title>
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'assets/css/webfonts.css' %}" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<div id="header">
+				<a class="logo kr" href="{% url 'homepage' %}"><strong>인공지능</strong> 폰트제작소</a>
+				<nav id="nav">
+					<ul>
+						<li><a href="{% url 'homepage' %}">Home</a></li>
+						<li><a href="{% url 'about' %}">About</a></li>
+						<li><a href="{% url 'trial' %}">Trial</a></li>
+						<li class="active"><a href="{% url 'create' %}">Create</a></li>
+                        <!-- 아래에 주석 처리된 메뉴는 로그인 후에 나타날 메뉴 -->
+						<!-- <li><a href="mypage.html">My Page</a></li> -->
+						<!-- 아래의 Login은 로그인 후에는 Logout으로 바뀌어야 함 -->
+						{% if not request.session.user and not user.is_authenticated %}
+							<li><a href="{% url 'login' %}" method="POST">Login</a></li>
+							{% elif request.session.user %}
+							<li><a href="{% url 'mypage' %}">My Page</a></li>
+							<li><a href="{% url 'logout' %}" method="POST">LogOut</a></li>
+							{% elif user.is_authenticated %}
+							<li><a href="{% url 'mypage' %}">My Page</a></li>
+							<li><a href="{% url 'socialout' %}" method="POST">LogOut</a></li>
+							{% endif %}
+					</ul>
+				</nav>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Header -->
+					<header>
+						<h1>Uploaded</h1>
+					</header>
+
+				<!-- Content -->
+					<section id="content" class="wrapper">
+						<span class="image main"><img src="{% static 'images/andrew-neel-cckf4TsHAuw-unsplash.jpg' %}" alt="" /></span>
+						<h2 class="kr-bold"><span class="icon solid fa-check-circle"></span> 파일이 전송되었습니다.</h2>
+						<p class="kr">파일이 성공적으로 전송되었습니다.<br>
+						캘리 개발팀에서 1시간 이내에 확인 후 (영업시간 기준) 회원님의 E-mail 주소로 확인 메일을 발송해드리겠습니다.</p>
+						<ul class="actions fit">
+							<li><a href="{% url 'create' %}" class="button">확인</a></li>
+						</ul>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+				<h2>Contact</h2>
+				<p class="kr contact">평일	am 10:00 ~ pm 5:00<br>
+					점심시간 pm 1:00 ~ pm 2:00<br>
+					토요일, 일요일/공휴일 휴무</p>
+				<ul class="major-icons">
+					<li>
+						<h3 class="icon solid fa-phone major"><span class="label">Phone</span></h3>
+						<p>+82 10-2576-2911</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-map major"><span class="label">Address</span></h3>
+						<p class="kr contact">광주 동구 예술길 31-15<br />광주 아트센터 4층 (61474)</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-envelope major"><span class="label">Email</span></h3>
+						<p>yoonopt@gmail.com</p>
+					</li>
+				</ul>
+				<p class="copyright">Copyright &copy; 2022. Cali. All rights reserved.</p>
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>

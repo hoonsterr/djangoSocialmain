@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+
+{% load static %}
+<!--
+	Elemental by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>캘리 :: 인공지능 캘리그래피 서비스</title>
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}?after" />
+		<link rel="stylesheet" type="text/css" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="{% static 'https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap' %}" rel="stylesheet">
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<div id="header" class="alt">
+				<a class="logo" href="{% url 'homepage' %}"><strong>인공지능</strong> 캘리그래피</a>
+				<nav id="nav">
+					<ul>
+						<li class="active"><a href="{% url 'homepage' %}">Home</a></li>
+						<li><a href="{% url 'about' %}">About</a></li>
+						<li><a href="{% url 'create' %}">Create</a></li>
+						<!-- 아래에 주석 처리된 메뉴는 로그인 후에 나타날 메뉴 -->
+						<!-- <li><a href="mypage.html">My Page</a></li> -->
+						<!-- 아래의 Login은 로그인 후에는 Logout으로 바뀌어야 함 -->
+
+							{% if not request.session.user and not user.is_authenticated %}
+							<li><a href="{% url 'login' %}" method="POST">Login</a></li>
+							{% elif request.session.user %}
+							<li><a href="{% url 'mypage' %}">My Page</a></li>
+							<li><a href="{% url 'logout' %}" method="POST">LogOut</a></li>
+							{% elif user.is_authenticated %}
+							<li><a href="{% url 'mypage' %}">My Page</a></li>
+							<li><a href="{% url 'socialout' %}" method="POST">LogOut</a></li>
+							{% endif %}
+
+
+
+					</ul>
+				</nav>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Header -->
+					<header>
+						<span class="logo"></span>
+						<h1><strong>인공지능</strong> 캘리그래피</h1>
+					</header>
+
+				<!-- Banner -->
+					<section class="home">
+						<!-- 메인 화면에 나타나는 아래 같은 멘트는 없는게 좋을 것 같아서 주석 처리 -->
+						<!-- <h2>글씨는<br />
+						마음의 거울이다.</h2>
+						<ul class="actions special">
+							<li><a href="#" class="button">Login</a></li>
+						</ul> -->
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper spotlight">
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">예쁜 글씨 대신 써드립니다.</h2>
+								<p class="kr">캘리(Cali)는 아름답다<sup>Beautiful</sup>는 의미의 영어 단어입니다. 현재, 미국에서 가장 많이 사용하는 여자아이 이름 중에 하나입니다. 그만큼 친숙하고 모던한 느낌의 단어이고 인공지능의 최신기술을 사용한 웹서비스에 가장 부합하는 이름입니다.</p>
+								<ul class="actions">
+									<li><a href="{% url 'about' %}" class="button">자세히 보기</a></li>
+								</ul>
+							</div>
+						</div>
+						<ul class="grid-icons">
+							<li>
+								<div class="inner">
+									<span class="icon solid fa-heart major"></span>
+									<h3>사랑을 담은</h3>
+								</div>
+							</li>
+							<li>
+								<div class="inner">
+									<span class="icon solid fa-pen-fancy major"></span>
+									<h3>손글씨 같은</h3>
+								</div>
+							</li>
+							<li>
+								<div class="inner">
+									<span class="icon solid fa-grin-beam major"></span>
+									<h3>예쁜 글씨</h3>
+								</div>
+							</li>
+							<li>
+								<div class="inner">
+									<span class="icon solid fa-images major"></span>
+									<h3>다양한 파일로 저장</h3>
+								</div>
+							</li>
+						</ul>
+					</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper style1 spotlight alt">
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">돈가스체</h2>
+								<p>겉은 바삭하고 속은 부드러운 돈가스 같은 느낌의 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="{% url 'create' %}" class="button">지금 만들기</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="image">
+							<img src="{% static 'images/pic02.jpg' %}" data-position="30% 30%" alt="" />
+						</div>
+					</section>
+
+				<!-- Three -->
+					<section id="three" class="wrapper style2 spotlight">
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">수육체</h2>
+								<p>기름기를 쫙 뺀 부드러운 수육 같은 느낌의 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="{% url 'create' %}" class="button">지금 만들기</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="image">
+							<img src="{% static 'images/pic03.jpg' %}" data-position="center right" alt="" />
+						</div>
+					</section>
+
+				<!-- Four -->
+					<section id="four" class="wrapper style3 spotlight alt">
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">딸기청체</h2>
+								<p>당도 60%의 딸기 밀크티 같은 느낌의 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="{% url 'create' %}" class="button">지금 만들기</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="image">
+							<img src="{% static 'images/pic04.jpg' %}" data-position="top right" alt="" />
+						</div>
+					</section>
+
+				<!-- Five -->
+					<section id="five" class="wrapper special">
+						<h2>만든 사람들</h2>
+						<p>캘리의 개발팀 멤버들을 소개합니다.</p>
+						<ul class="faces">
+							<li>
+								<span class="image"><img src="{% static 'images/pic05.jpg' %}" alt="" /></span>
+								<h3>윤영</h3>
+								<p>"Aliquam erat et volutpat. Nam dui mi, tincidunt quis, porttitor magna etiam lorem tempus."</p>
+							</li>
+							<li>
+								<span class="image"><img src="{% static 'images/pic06.jpg' %}" alt="" /></span>
+								<h3>허성민</h3>
+								<p>"Aliquam erat et volutpat. Nam dui mi, tincidunt quis, porttitor magna etiam lorem tempus."</p>
+							</li>
+							<li>
+								<span class="image"><img src="{% static 'images/pic07.jpg' %}" alt="" /></span>
+								<h3>김상태</h3>
+								<p>"Aliquam erat et volutpat. Nam dui mi, tincidunt quis, porttitor magna etiam lorem tempus."</p>
+							</li>
+						</ul>
+						<hr>
+						<ul class="faces">
+							<li>
+								<span class="image"><img src="{% static 'images/pic05.jpg' %}" alt="" /></span>
+								<h3>김도현</h3>
+								<p>"Aliquam erat et volutpat. Nam dui mi, tincidunt quis, porttitor magna etiam lorem tempus."</p>
+							</li>
+							<li>
+								<span class="image"><img src="{% static 'images/pic06.jpg' %}" alt="" /></span>
+								<h3>조성훈</h3>
+								<p>"Aliquam erat et volutpat. Nam dui mi, tincidunt quis, porttitor magna etiam lorem tempus."</p>
+							</li>
+							<li>
+								<span class="image"><img src="{% static 'images/pic07.jpg' %}" alt="" /></span>
+								<h3>???</h3>
+								<p>"Aliquam erat et volutpat. Nam dui mi, tincidunt quis, porttitor magna etiam lorem tempus."</p>
+							</li>
+						</ul>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+				<h2>Contact</h2>
+				<p class="kr contact">평일	am 10:00 ~ pm 5:00<br>
+					점심시간 pm 1:00 ~ pm 2:00<br>
+					토요일, 일요일/공휴일 휴무</p>
+				<ul class="major-icons">
+					<li>
+						<h3 class="icon solid fa-phone major"><span class="label">Phone</span></h3>
+						<p>+82 10-2576-2911</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-map major"><span class="label">Address</span></h3>
+						<p class="kr contact">광주 동구 예술길 31-15<br />광주 아트센터 4층 (61474)</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-envelope major"><span class="label">Email</span></h3>
+						<p>yoonopt@gmail.com</p>
+					</li>
+				</ul>
+				<p class="copyright">Copyright &copy; 2022. Cali. All rights reserved.</p>
+			</div>
+
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>

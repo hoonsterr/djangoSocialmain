@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+{% load static %}
+<!--
+	Elemental by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>캘리 :: 인공지능 캘리그래피 서비스</title>
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<div id="header">
+				<a class="logo" href="{% url 'homepage' %}"><strong>인공지능</strong> 캘리그래피</a>
+				<nav id="nav">
+					<ul>
+						<li><a href="{% url 'homepage' %}">Home</a></li>
+						<li class="active"><a href="{% url 'about' %}">About</a></li>
+						<li><a href="{% url 'create' %}">Create</a></li>
+							{% if not request.session.user and not user.is_authenticated %}
+							<li><a href="{% url 'login' %}" method="POST">Login</a></li>
+							{% elif request.session.user %}
+							<li><a href="{% url 'mypage' %}">My Page</a></li>
+							<li><a href="{% url 'logout' %}" method="POST">LogOut</a></li>
+							{% elif user.is_authenticated %}
+							<li><a href="{% url 'mypage' %}">My Page</a></li>
+							<li><a href="{% url 'socialout' %}" method="POST">LogOut</a></li>
+							{% endif %}
+					</ul>
+				</nav>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Header -->
+					<header>
+						<h1>About Cali</h1>
+					</header>
+
+				<!-- Content -->
+					<section id="content" class="wrapper">
+						<span class="image main"><img src="{% static 'images/pic08.jpg' %}" alt="" /></span>
+						<h2 class="kr-bold">당신의 마음을 표현해주는 인공지능 캘리그래피</h2>
+						<p class="kr">캘리그래피<sup>Caligraphy</sup>는 글의 정체성을 가장 효과적으로 드러낼 수 있는 표현 예술입니다.
+							글씨에는 쓴 사람의 마음결이 담겨 있습니다. 어느 누구라도 표현이 서툴러 안에서만 맴도는 답답한 마음을 속 시원하게 보여줄 글씨체를 갖고 싶어 할 겁니다.
+							이러한 사람의 마음을 헤아려 자신이 갖고 싶은 비슷한 글씨체를 선택하고, 표현하고 싶은 글을 적으면 멋진 캘리그래피가 만들어집니다. 어떤가요? 가슴이 뛰지 않나요?</p>
+						<p class="kr">인공지능이 캘리그래피를 학습하고 스스로 독창적인 캘리그래피를 창조할 수 있도록 합니다.
+							캘리그래피 쓰는 사람에게 직접 부탁하려면 시간도 걸리고, 가격도 비쌉니다.
+							로고 제작을 할 때, 나만의 글씨로 누군가에게 내 마음을 표현하고 싶을 때, 간판 시안을 제작할 때, 캘리를 이용해 보세요.
+							집에서 편하게 바로 만들어서 눈으로 확인해볼 수 있습니다.
+							지금 바로 만들어보세요.</p>
+						<ul class="actions">
+							<li><a href="{% url 'create' %}" class="button">지금 만들기</a></li>
+						</ul>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+				<h2>Contact</h2>
+				<p class="kr contact">평일	am 10:00 ~ pm 5:00<br>
+					점심시간 pm 1:00 ~ pm 2:00<br>
+					토요일, 일요일/공휴일 휴무</p>
+				<ul class="major-icons">
+					<li>
+						<h3 class="icon solid fa-phone major"><span class="label">Phone</span></h3>
+						<p>+82 10-2576-2911</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-map major"><span class="label">Address</span></h3>
+						<p class="kr contact">광주 동구 예술길 31-15<br />광주 아트센터 4층 (61474)</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-envelope major"><span class="label">Email</span></h3>
+						<p>yoonopt@gmail.com</p>
+					</li>
+				</ul>
+				<p class="copyright">Copyright &copy; 2022. Cali. All rights reserved.</p>
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>

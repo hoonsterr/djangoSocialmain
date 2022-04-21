@@ -1,1 +1,1 @@
-# djangoSocialmain
+# djangoSocial

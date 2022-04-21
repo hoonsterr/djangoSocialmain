@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>캘리 :: 인공지능 캘리그래피 서비스</title>
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="{% static 'https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap' %}" rel="stylesheet">
+	</head>
+	<body class="is-preload">
+		<div class="container" id="blur">
+
+		<!-- Header -->
+			<div id="header">
+				<a class="logo" href="{% url 'homepage' %}"><strong>인공지능</strong> 캘리그래피</a>
+				<nav id="nav">
+					<ul>
+						<li><a href="{% url 'homepage' %}">Home</a></li>
+						<li><a href="{% url 'about' %}">About</a></li>
+						<li><a href="{% url 'create' %}">Create</a></li>
+                        <li class="active"><a href="{% url 'mypage' %}">My Page</a></li>
+						<li><a href="{% url 'logout' %}">Logout</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Header -->
+					<header>
+						<h1>My Page</h1>
+					</header>
+
+				<!-- Content -->
+					{% if request.session.user %}
+						<h3 class="align-center kr-bold">{{ request.session.user }}님이 만든 캘리그래피</h3>
+					{% elif user.is_authenticated %}
+						<h3 class="align-center kr-bold">{{ request.user }}님이 만든 캘리그래피</h3>
+					{% endif %}}
+                    <div class="box alt">
+                        <div class="row gtr-50 gtr-uniform">
+                            <div class="col-6"><span class="image fit"><a href="javascript:void(0);" onclick="toggle();"><img src="{% static 'images/pic01.jpg' %}" alt="" /></a></span></div>
+                            <div class="col-6"><span class="image fit"><a href="javascript:void(0);" onclick="toggle();"><img src="{% static 'images/pic01.jpg' %}" alt="" /></a></span></div>
+                            <!-- Break -->
+                            <div class="col-6"><span class="image fit"><a href="javascript:void(0);" onclick="toggle();"><img src="{% static 'images/pic01.jpg' %}" alt="" /></a></span></div>
+                            <div class="col-6"><span class="image fit"><a href="javascript:void(0);" onclick="toggle();"><img src="{% static 'images/pic01.jpg' %}" alt="" /></a></span></div>
+                            <!-- Break -->
+                            <div class="col-6"><span class="image fit"><a href="javascript:void(0);" onclick="toggle();"><img src="{% static 'images/pic01.jpg' %}" alt="" /></a></span></div>
+                            <div class="col-6"><span class="image fit"><a href="javascript:void(0);" onclick="toggle();"><img src="{% static 'images/pic01.jpg' %}" alt="" /></a></span></div>
+                        </div>
+                    </div>
+
+			</div>
+
+		<!-- Footer -->
+			<div id="footer">
+				<h2>Contact</h2>
+				<p class="kr contact">평일	am 10:00 ~ pm 5:00<br>
+					점심시간 pm 1:00 ~ pm 2:00<br>
+					토요일, 일요일/공휴일 휴무</p>
+				<ul class="major-icons">
+					<li>
+						<h3 class="icon solid fa-phone major"><span class="label">Phone</span></h3>
+						<p>+82 10-2576-2911</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-map major"><span class="label">Address</span></h3>
+						<p class="kr contact">광주 동구 예술길 31-15<br />광주 아트센터 4층 (61474)</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-envelope major"><span class="label">Email</span></h3>
+						<p>yoonopt@gmail.com</p>
+					</li>
+				</ul>
+				<p class="copyright">Copyright &copy; 2022. Cali. All rights reserved.</p>
+			</div>
+		</div>
+
+		<!-- Popup -->
+		<div id="popup">
+			<h2 class="kr-bold">재다운로드</h2>
+
+			<span class="image main"><img src="{% static 'images/pic08.jpg' %}" alt="" /></span>
+			<ul class="actions fit">
+				<li><a href="#" class="button primary">저장하기</a></li>
+				<li><a href="javascript:void(0);" class="button" onclick="toggle()">닫기</a></li>
+			</ul>
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+        	<script>
+				/* 화면의 가로 사이즈가 760픽셀 이상이면 이미지가 한 줄에 2개,
+				760픽셀 미만이면 이미지가 한 줄에 하나만 표시되게 class명을 바꿔주는 함수 */
+                $(window).resize(function() {
+                    if($(window).width() < 760) {
+                        $(".col-6").attr('class','col-12')
+                    } else {
+                        $(".col-12").attr('class','col-6')
+                    }
+                });
+
+                $(document).ready(function() {
+                    if($(window).width() < 760) {
+                        $(".col-6").attr('class','col-12')
+                    }
+                });
+
+				/* 팝업창 뜨게 하는 함수 */
+				function toggle(){
+					let blur = document.getElementById('blur');
+					blur.classList.toggle('active');
+					let popup = document.getElementById('popup');
+					popup.classList.toggle('active');
+				}
+            </script>
+
+	</body>
+</html>

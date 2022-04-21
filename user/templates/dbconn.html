@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  {% for value in result %}
+    id: {{ value.user_email }} <br />
+    pw: {{ value.user_pw }}
+  {% endfor %}
+
+</body>
+</html>

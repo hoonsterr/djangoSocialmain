@@ -1,0 +1,356 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="kr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>캘리 :: 인공지능 캘리그래피 서비스</title>
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+	</head>
+	<body class="is-preload">
+		<div class="container" id="blur">
+
+		<!-- Header -->
+			<div id="header">
+				<a class="logo" href="{% url 'homepage' %}"><strong>인공지능</strong> 캘리그래피</a>
+				<nav id="nav">
+					<ul>
+						<li><a href="{% url 'homepage' %}">Home</a></li>
+						<li><a href="{% url 'about' %}">About</a></li>
+						<li class="active"><a href="{% url 'create' %}">Create</a></li>
+                        <!-- 아래에 주석 처리된 메뉴는 로그인 후에 나타날 메뉴 -->
+						<!-- <li><a href="mypage.html">My Page</a></li> -->
+						<!-- 아래의 Login은 로그인 후에는 Logout으로 바뀌어야 함 -->
+						{% if not request.session.user and not user.is_authenticated %}
+							<li><a href="{% url 'login' %}" method="POST">Login</a></li>
+							{% elif request.session.user %}
+							<li><a href="{% url 'mypage' %}">My Page</a></li>
+							<li><a href="{% url 'logout' %}" method="POST">LogOut</a></li>
+							{% elif user.is_authenticated %}
+							<li><a href="{% url 'mypage' %}">My Page</a></li>
+							<li><a href="{% url 'socialout' %}" method="POST">LogOut</a></li>
+							{% endif %}
+					</ul>
+				</nav>
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Header -->
+					<header>
+						<h1>Create Cali</h1>
+					</header>
+
+				<!-- Select1 -->
+					<section id="two" class="wrapper style1 spotlight alt">
+						<div class="image">
+							<img src="{% static 'images/caligraphy.jpg' %}" data-position="30% 30%" alt="" />
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">돈가스체</h2>
+								<p>겉은 바삭하고 속은 부드러운 돈가스 같은 느낌의 글씨체입니다.</p>
+								<ul class="actions">
+									<!-- a태그의 href="#" 때문에 클릭을 하면 페이지의 상단으로 이동하는 현상이 있었음. 구글링 덕분에 해결. -->
+									<li><a href="javascript:void(0);" class="button" onclick="toggle(); select1();">만들기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+				<!-- Select2 -->
+					<section id="three" class="wrapper style2 spotlight">
+						<div class="image">
+							<img src="{% static 'images/pic03.jpg' %}" data-position="center right" alt="" />
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">수육체</h2>
+								<p>기름기를 쫙 뺀 부드러운 수육 같은 느낌의 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="javascript:void(0);" class="button" onclick="toggle(); select2();">만들기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+				<!-- Select3 -->
+					<section id="four" class="wrapper style3 spotlight alt">
+						<div class="image">
+							<img src="{% static 'images/pic04.jpg' %}" data-position="top right" alt="" />
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">딸기청체</h2>
+								<p>당도 60%의 딸기 밀크티 같은 느낌의 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="javascript:void(0);" class="button" onclick="toggle(); select3();">만들기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+                <!-- Select4 -->
+					<section id="two" class="wrapper style1 spotlight">
+						<div class="image">
+							<img src="{% static 'images/pic02.jpg' %}" data-position="30% 30%" alt="" />
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">레몬체</h2>
+								<p>비타민 가득 상큼한 레몬 같은 느낌의 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="javascript:void(0);" class="button" onclick="toggle(); select4();">만들기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+				<!-- Select5 -->
+					<section id="three" class="wrapper style2 spotlight alt">
+						<div class="image">
+							<img src="{% static 'images/pic03.jpg' %}" data-position="center right" alt="" />
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">월요일체</h2>
+								<p>월요일 아침의 직장인의 마음을 표현한 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="javascript:void(0);" class="button" onclick="toggle(); select5();">만들기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+				<!-- Select6 -->
+					<section id="four" class="wrapper style3 spotlight">
+						<div class="image">
+							<img src="{% static 'images/pic04.jpg' %}" data-position="top right" alt="" />
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">오십견체</h2>
+								<p>오십견에 걸린 어깨로 쓴 듯한 느낌의 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="javascript:void(0);" class="button" onclick="toggle(); select6();">만들기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+                <!-- Select7 -->
+					<section id="two" class="wrapper style1 spotlight alt">
+						<div class="image">
+							<img src="{% static 'images/pic02.jpg' %}" data-position="30% 30%" alt="" />
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">소풍체</h2>
+								<p>봄날에 소풍을 떠나는 마음을 표현한 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="javascript:void(0);" class="button" onclick="toggle(); select7();">만들기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+				<!-- Select8 -->
+					<section id="three" class="wrapper style2 spotlight">
+						<div class="image">
+							<img src="{% static 'images/pic03.jpg' %}" data-position="center right" alt="" />
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">치킨체</h2>
+								<p>주말 저녁에 영화를 보며 치킨을 먹는 마음을 표현한 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="javascript:void(0);" class="button" onclick="toggle(); select8();">만들기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+				<!-- Select9 -->
+					<section id="four" class="wrapper style3 spotlight alt">
+						<div class="image">
+							<img src="{% static 'images/pic04.jpg' %}" data-position="top right" alt="" />
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h2 class="kr-bold">면역력체</h2>
+								<p>각종 질병에 걸리지 않도록 건강을 염원하는 마음을 담은 글씨체입니다.</p>
+								<ul class="actions">
+									<li><a href="javascript:void(0);" class="button" onclick="toggle(); select9();">만들기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+            <!-- Pagination -->
+                <section id="content" class="wrapper special">
+			    	<h2></h2>
+					<div class="pagination">
+						<a href="#">&laquo;</a>
+						<a href="#" class="active">1</a>
+						<a href="#">2</a>
+						<a href="#">3</a>
+						<a href="#">4</a>
+						<a href="#">5</a>
+						<a href="#">&raquo;</a>
+					</div>
+                </section>
+            </div>
+
+		<!-- Footer -->
+			<div id="footer">
+				<h2>Contact</h2>
+				<p class="kr contact">평일	am 10:00 ~ pm 5:00<br>
+					점심시간 pm 1:00 ~ pm 2:00<br>
+					토요일, 일요일/공휴일 휴무</p>
+				<ul class="major-icons">
+					<li>
+						<h3 class="icon solid fa-phone major"><span class="label">Phone</span></h3>
+						<p>+82 10-2576-2911</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-map major"><span class="label">Address</span></h3>
+						<p class="kr contact">광주 동구 예술길 31-15<br />광주 아트센터 4층 (61474)</p>
+					</li>
+					<li>
+						<h3 class="icon solid fa-envelope major"><span class="label">Email</span></h3>
+						<p>yoonopt@gmail.com</p>
+					</li>
+				</ul>
+				<p class="copyright">Copyright &copy; 2022. Cali. All rights reserved.</p>
+			</div>
+		</div>
+
+		<!-- Popup -->
+		<div id="popup">
+			<h2>Create Cali</h2>
+
+			<form method="post" action="#">
+				<div class="row gtr-uniform">
+					<p>원하는 글씨체를 선택하고, 생성할 문구를 입력해주세요.</p>
+					<!-- Break -->
+					<div class="col-12">
+						<select name="category" id="category">
+							<option value="">- 글씨체 선택 -</option>
+							<option value="1">돈가스체</option>
+							<option value="2">수육체</option>
+							<option value="3">딸기청체</option>
+							<option value="4">레몬체</option>
+							<option value="5">월요일체</option>
+							<option value="6">오십견체</option>
+							<option value="7">소풍체</option>
+							<option value="8">치킨체</option>
+							<option value="9">면역력체</option>
+						</select>
+					</div>
+					<!-- Break -->
+					<div class="col-12">
+						<textarea name="message" id="message" placeholder="Enter your message" rows="3"></textarea>
+					</div>
+					<!-- Break -->
+					<div class="col-12">
+						<ul class="actions fit">
+							<li><a href="result.html" class="button primary">만들기</a></li>
+							<!-- <li><input type="submit" value="만들기" class="primary" /></li> -->
+							<li><input type="reset" value="Reset" /></li>
+							<!-- a태그의 href="#" 때문에 클릭을 하면 페이지의 상단으로 이동하는 현상이 있었음. 구글링 덕분에 해결. -->
+							<li><a href="javascript:void(0);" class="button" onclick="toggle()">닫기</a></li>
+						</ul>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+		<!-- 팝업창 뜨게 하는 자바스크립트 코드 -->
+			<script type="text/javascript">
+				function toggle(){
+					let blur = document.getElementById('blur');
+					blur.classList.toggle('active');
+					let popup = document.getElementById('popup');
+					popup.classList.toggle('active');
+				}
+
+				/* 아래부터의 함수들은,
+				돈가스체에서 '만들기'를 클릭했을 경우에는 팝업창에도 처음부터 돈가스체가 선택되게 하고
+				딸기청체에서 '만들기'를 클릭했을 경우에는 팝업창에도 처음부터 딸기청체가 선택되게 하는 함수들 */
+				function select1(){
+					let sel = document.getElementById("category");
+					sel[1].selected = true;
+				}
+				function select2(){
+					let sel = document.getElementById("category");
+					sel[2].selected = true;
+				}
+				function select3(){
+					let sel = document.getElementById("category");
+					sel[3].selected = true;
+				}
+				function select4(){
+					let sel = document.getElementById("category");
+					sel[4].selected = true;
+				}
+				function select5(){
+					let sel = document.getElementById("category");
+					sel[5].selected = true;
+				}
+				function select6(){
+					let sel = document.getElementById("category");
+					sel[6].selected = true;
+				}
+				function select7(){
+					let sel = document.getElementById("category");
+					sel[7].selected = true;
+				}
+				function select8(){
+					let sel = document.getElementById("category");
+					sel[8].selected = true;
+				}
+				function select9(){
+					let sel = document.getElementById("category");
+					sel[9].selected = true;
+				}
+
+				/* 위의 함수들이 너무 반복이 돼서 줄일 수 있는 방법이 없는지 선생님께 물어봐서
+				선생님께서 아래처럼 코드를 짜주셨는데.. 내가 원하는 효과가 아니라서 그냥 주석 처리.. */
+				// function toggle(){
+				// 	let blur = document.getElementById('blur');
+				// 	blur.classList.toggle('active');
+				// 	let popup = document.getElementById('popup');
+				// 	popup.classList.toggle('active');
+				// }
+
+				// $('a.button').on("click", function(){
+				// 	console.log(1);
+				// 	toggle();
+
+				// 	//let f = $(this)
+				// 	let pa = $(this).parent().parent().parent().text();
+				// 	console.log(pa.trim());
+				// 	let result = pa.trim().indexOf("체");
+				// 	let result2 = pa.trim().slice(0, result+1);
+				// 	console.log(result2);
+
+				// 	let font = document.getElementById("font");
+				// 	font.innerText = result2;
+				// });
+			</script>
+
+	</body>
+</html>
